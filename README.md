@@ -61,3 +61,25 @@ Purpose
 This project is intended as a simple educational example for anyone learning:
 FASM, x86 Assembly, Win32 API, GUI programming, and event-driven programming.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+11-09-2026
+ASM Service Terminal — Login-Controlled Win32 Application
+
+This small Windows application was written entirely in Flat Assembler (FASM) using the native Win32 API.
+
+The current version demonstrates several practical concepts that can later be reused in a more advanced engineering or microcontroller service terminal.
+
+Main features:
+
+Password is read dynamically: password.txt is opened and read only when the user presses OK in the Login dialog. Each new Login attempt reads the file again, so the password can be changed while the application is still running.
+Controlled application exit: while the user is logged in, both the Exit button and the standard window close action are blocked. The user must perform Logout first.
+Persistent message history during the session: messages are appended to a multiline Win32 EDIT control using EM_SETSEL and EM_REPLACESEL, so previous messages remain visible and can be reviewed with the scrollbar.
+Memory-only message storage: the application does not write the message history to disk. Messages remain only in memory and inside the Win32 control until the application is closed.
+Login / Logout state management: the input field and Send button are disabled by default and become available only after successful authentication.
+
+The project is intentionally simple, but the same architecture can later be extended into a service or engineering terminal with serial communication, MCU diagnostics, GPIO tests, I²C commands, ADC measurements, configuration functions, and different access levels.
+
+Built with:
+FASM + Win32 API
+
+#FASM #Assembly #AssemblyLanguage #Win32API #LowLevelProgramming #EmbeddedSystems #Firmware #STM32 #PIC32 #EngineeringTools
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
