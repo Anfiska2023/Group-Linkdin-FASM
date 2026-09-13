@@ -1,0 +1,64 @@
+========================================================================================================
+                         FASM EXECUTABLE EVOLUTION (WIN32 GUI)
+========================================================================================================
+
+    [ STAGE 1: INITIAL FILE ]            [ STAGE 2: REFACTORING & LOGIN ]       [ STAGE 3: FINAL TERMINAL ]
+           (hello.ASM)                        (FASM_Service_Terminal)                  (hello_awesome3.ASM)
+ ┌─────────────────────────────┐        ┌─────────────────────────────┐        ┌───────────────────────────────┐
+ │ +-------------------------+ │        │ +-------------------+ +---+ │        │ +---------------------+ +---+ │
+ │ |     Hello Awesome       | │        │ |                   | |Log| │        │ | <26-09-13> <17-15>  | |Log| │
+ │ +-------------------------+ │        │ | [History EDIT]    | +---+ │        │ |                     | +---+ │
+ │                             │        │ |                   | |Snd| │        │ | [History EDIT]      | |Snd| │
+ │  [Red Background (GDI)]     │ =====> │ +-------------------+ +---+ │ =====> │ | (Scalable Font)     | +---+ │
+ │  [Blue STATIC Text]         │        │ +-------------------+ +---+ │        │ +---------------------+ |Clr| │
+ │                             │        │ | [Input EDIT]      | |Ext| │        │ +---------------------+ +---+ │
+ │                             │        │ +-------------------+ +---+ │        │ | [Input EDIT]        | |Sav| │
+ └─────────────────────────────┘        └─────────────────────────────┘        │ +---------------------+ ...   │
+                                                                               └───────────────────────────────┘
+                │                                      │                                       │
+                ▼                                      ▼                                       ▼
+ 🛠️  ARCHITECTURE & FEATURES:             🛠️  ARCHITECTURE & FEATURES:             🛠️  ARCHITECTURE & FEATURES:
+ ------------------------------          ------------------------------          -------------------------------
+ • Simple static label                   • Split into 2 EDIT controls            • Responsive layout (WM_SIZE)
+ • Fixed window size (300x150)           • Modal password dialog (Pass)          • Fullscreen maximizing support
+ • Red GDI brush (CreateSolidBrush)      • password.txt verification             • Timestamping: <YY-MM-DD> <HH-MM-SS>
+ • Minimal Win32 API imports             • Session locking system                • History clearing (Clear)
+                                         • Message transmission (Send)           • File export with timestamp (Save)
+                                                                                 • Dynamic scaling (Zoom +/-)
+                                                                                 • GDI font management (Courier New)
+
+========================================================================================================
+                                     STEP-BY-STEP COMPARATIVE ANALYSIS
+========================================================================================================
+
+┌────────────────────────────┬─────────────────────────────┬─────────────────────────────┬─────────────────────────────┐
+│ CATEGORY                   │ STAGE 1 (hello.ASM)         │ STAGE 2 (Initial Terminal)  │ STAGE 3 (Final Version)     │
+├────────────────────────────┼─────────────────────────────┼─────────────────────────────┼─────────────────────────────┤
+│ 1. User Interface (GUI)    │ Single static label         │ 2 EDIT controls + 3 buttons │ Responsive layout +7 buttons│
+│ 2. Window Resizing         │ Disabled                    │ Disabled                    │ Automatic (WM_SIZE)         │
+│ 3. Security & Session      │ None                        │ Password Login(password.txt)│ Strict Exit protection      │
+│ 4. Message Formatting      │ None                        │ Line break (\r\n)           │ Timestamping +Forced newline│
+│ 5. File System Operations  │ None                        │ Read password.txt           │ Save logs to window_*.txt   │
+│ 6. Graphics Management     │ Static colors (SetBkColor)  │ System background           │ Dynamic GDI fonts           │
+└────────────────────────────┴─────────────────────────────┴─────────────────────────────┴─────────────────────────────┘
+
+========================================================================================================
+                                💻 API IMPORT SECTION EVOLUTION (Win32)
+========================================================================================================
+
+  kernel32.dll                         user32.dll                              gdi32.dll
+  ┌─────────────────────────┐          ┌──────────────────────────────────┐    ┌───────────────────────────┐
+  │ GetModuleHandle         │          │ RegisterClass                    │    │ CreateSolidBrush (Stage 1)│
+  │ ExitProcess             │          │ CreateWindowEx                   │    │ SetTextColor     (Stage 1)│
+  │ CreateFileA   (Stage 2) │          │ DefWindowProc                    │    │ SetBkColor       (Stage 1)│
+  │ ReadFile      (Stage 2) │          │ GetMessage / TranslateMessage    │    │ DeleteObject     (Stage 1)│
+  │ CloseHandle   (Stage 2) │          │ DispatchMessage / PostQuitMessage│    │ CreateFontA      (Stage 3)│
+  │ RtlZeroMemory (Stage 2) │          │ LoadIcon / LoadCursor            │    └───────────────────────────┘
+  │ GetLocalTime  (Stage 3) │          │ GetSysColorBrush                 │
+  │ WriteFile     (Stage 3) │          │ SendMessage       (Stage 2)      │
+  │ GlobalAlloc   (Stage 3) │          │ Get/SetWindowText (Stage 2)      │
+  │ GlobalFree    (Stage 3) │          │ MessageBox        (Stage 2)      │
+  └─────────────────────────┘          │ DialogBoxParam    (Stage 2)      │
+                                       │ GetClientRect     (Stage 3)      │
+                                       │ MoveWindow        (Stage 3)      │
+                                       └──────────────────────────────────┘
