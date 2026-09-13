@@ -84,3 +84,7 @@ FASM + Win32 API
 #FASM #Assembly #AssemblyLanguage #Win32API #LowLevelProgramming #EmbeddedSystems #Firmware #STM32 #PIC32 #EngineeringTools
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Version 3 expands FASM Service Terminal(HELLO AWESOME3) with timestamped history entries, forced line separation, automatic history scrolling, Clear, resizable/maximizable layout, practical Zoom controls for bench visibility, and Save to a timestamped TXT test log. The authenticated-session workflow and controlled-exit behavior are retained. Screenshots and a real saved-log example are included in the documentation. The next major stage is COM/UART communication.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Project Evolution
+See EVOLUTION.txt for a step-by-step comparison of the three development stages, including GUI architecture, Win32 API usage, session control, file operations, responsive layout, and terminal features.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
